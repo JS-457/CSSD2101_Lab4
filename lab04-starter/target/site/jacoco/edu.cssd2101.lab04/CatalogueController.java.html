@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CatalogueController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">lab04-starter</a> &gt; <a href="index.source.html" class="el_package">edu.cssd2101.lab04</a> &gt; <span class="el_source">CatalogueController.java</span></div><h1>CatalogueController.java</h1><pre class="source lang-java linenums">package edu.cssd2101.lab04;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
+import java.util.List;
+
+/** HTTP driving adapter; delegates all catalogue rules to the service. */
+@RestController
+@RequestMapping(&quot;/api/books&quot;)
+public final class CatalogueController {
+    private final CatalogueService service;
+
+    /**
+     * Creates the adapter.
+     *
+     * @param service application operations
+     */
+<span class="nc" id="L20">    public CatalogueController(CatalogueService service) {</span>
+<span class="nc" id="L21">        this.service = service;</span>
+<span class="nc" id="L22">    }</span>
+
+    /**
+     * Lists books.
+     *
+     * @return insertion-order JSON array
+     */
+    @GetMapping
+    public List&lt;Book&gt; all() {
+<span class="nc" id="L31">        return service.all();</span>
+    }
+
+    /**
+     * Finds a book.
+     *
+     * @param id route identifier
+     * @return matching entry
+     */
+    @GetMapping(&quot;/{id}&quot;)
+    public Book find(@PathVariable String id) {
+<span class="nc" id="L42">        return service.find(id);</span>
+    }
+
+    /**
+     * Creates a book.
+     *
+     * @param request untrusted JSON fields
+     * @return 201 with Location and persisted entry
+     */
+    @PostMapping
+    public ResponseEntity&lt;Book&gt; create(@RequestBody BookRequest request) {
+<span class="nc" id="L53">        Book created = service.create(request);</span>
+<span class="nc" id="L54">        return ResponseEntity.created(URI.create(&quot;/api/books/&quot; + created.id())).body(created);</span>
+    }
+
+    /**
+     * Replaces a book.
+     *
+     * @param id route identity, never taken from the body
+     * @param request complete replacement fields
+     * @return persisted entry with unchanged identity
+     */
+    @PutMapping(&quot;/{id}&quot;)
+    public Book replace(@PathVariable String id, @RequestBody BookRequest request) {
+<span class="nc" id="L66">        return service.replace(id, request);</span>
+    }
+
+    /**
+     * Deletes a book.
+     *
+     * @param id route identity
+     * @return 204 with no response body
+     */
+    @DeleteMapping(&quot;/{id}&quot;)
+    public ResponseEntity&lt;Void&gt; delete(@PathVariable String id) {
+<span class="nc" id="L77">        service.delete(id);</span>
+<span class="nc" id="L78">        return ResponseEntity.noContent().build();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>

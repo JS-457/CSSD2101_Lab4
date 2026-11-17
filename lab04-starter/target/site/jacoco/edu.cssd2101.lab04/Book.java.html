@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Book.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">lab04-starter</a> &gt; <a href="index.source.html" class="el_package">edu.cssd2101.lab04</a> &gt; <span class="el_source">Book.java</span></div><h1>Book.java</h1><pre class="source lang-java linenums">package edu.cssd2101.lab04;
+
+/**
+ * An immutable catalogue entry. Currency is CAD; amounts are integer cents.
+ *
+ * @param id canonical lower-case UUID assigned by the service
+ * @param title trimmed title of 1 to 120 characters
+ * @param priceCents price between zero and 100,000,000 cents inclusive
+ * @param format physical or digital publication format
+ */
+public record Book(String id, String title, long priceCents, Format format) {
+    /**
+     * Validates and normalizes an entry.
+     *
+     * @throws IllegalArgumentException if any field violates its contract
+     */
+<span class="fc" id="L17">    public Book {</span>
+<span class="fc" id="L18">        validateId(id);</span>
+<span class="pc bpc" id="L19" title="2 of 6 branches missed.">        if (title == null || title.isBlank() || title.strip().length() &gt; 120)</span>
+<span class="fc" id="L20">            throw new IllegalArgumentException(&quot;Title must contain 1 to 120 characters&quot;);</span>
+<span class="fc" id="L21">        title = title.strip();</span>
+<span class="pc bpc" id="L22" title="2 of 4 branches missed.">        if (priceCents &lt; 0 || priceCents &gt; 100_000_000)</span>
+<span class="nc" id="L23">            throw new IllegalArgumentException(&quot;Price must be 0 to 100000000 CAD cents&quot;);</span>
+<span class="pc bpc" id="L24" title="1 of 2 branches missed.">        if (format == null) throw new IllegalArgumentException(&quot;Format is required&quot;);</span>
+<span class="fc" id="L25">    }</span>
+
+    /**
+     * Validates canonical identifiers.
+     *
+     * @param id identifier to validate
+     * @throws IllegalArgumentException if not a canonical lower-case UUID
+     */
+    public static void validateId(String id) {
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">        if (id == null</span>
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">                || !id.matches(&quot;[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}&quot;))</span>
+<span class="nc" id="L36">            throw new IllegalArgumentException(&quot;Identifier must be a canonical UUID&quot;);</span>
+<span class="fc" id="L37">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ApiErrors.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">lab04-starter</a> &gt; <a href="index.source.html" class="el_package">edu.cssd2101.lab04</a> &gt; <span class="el_source">ApiErrors.java</span></div><h1>ApiErrors.java</h1><pre class="source lang-java linenums">package edu.cssd2101.lab04;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+/** Translates known failures at the HTTP boundary. */
+@RestControllerAdvice
+public final class ApiErrors {
+    /** Creates the stateless exception adapter. */
+<span class="nc" id="L12">    public ApiErrors() {}</span>
+
+    /**
+     * Maps invalid domain values or malformed JSON to 400.
+     *
+     * @return safe invalid-request response
+     */
+    @ExceptionHandler({IllegalArgumentException.class, HttpMessageNotReadableException.class})
+    public ResponseEntity&lt;ApiError&gt; invalid() {
+<span class="nc" id="L21">        return ResponseEntity.badRequest()</span>
+<span class="nc" id="L22">                .body(new ApiError(&quot;INVALID_REQUEST&quot;, &quot;Check the request fields and identifier&quot;));</span>
+    }
+
+    /**
+     * Maps missing resources to 404.
+     *
+     * @return safe not-found response
+     */
+    @ExceptionHandler(MissingBookException.class)
+    public ResponseEntity&lt;ApiError&gt; missing() {
+<span class="nc" id="L32">        return ResponseEntity.status(404).body(new ApiError(&quot;NOT_FOUND&quot;, &quot;Book not found&quot;));</span>
+    }
+
+    /**
+     * Maps storage failure to 503.
+     *
+     * @return safe retry-later response
+     */
+    @ExceptionHandler(StorageException.class)
+    public ResponseEntity&lt;ApiError&gt; storage() {
+<span class="nc" id="L42">        return ResponseEntity.status(503)</span>
+<span class="nc" id="L43">                .body(new ApiError(&quot;STORAGE_UNAVAILABLE&quot;, &quot;Catalogue could not be saved&quot;));</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>

@@ -22,7 +22,7 @@ public class Main {
     }
 
     /**
-     * Wires the transient baseline adapter; Task T4 replaces it with JSON storage.
+     * Wires the JSON storage.
      *
      * @param file configured private catalogue file
      * @return transient baseline catalogue service

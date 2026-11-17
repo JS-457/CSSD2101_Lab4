@@ -1,0 +1,13 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+lab04-starter,edu.cssd2101.lab04,StorageException,5,0,0,0,2,0,1,0,1,0
+lab04-starter,edu.cssd2101.lab04,BookRequest,5,27,1,1,0,3,1,2,0,2
+lab04-starter,edu.cssd2101.lab04,Book,15,52,7,9,2,11,7,3,0,2
+lab04-starter,edu.cssd2101.lab04,ApiErrors,29,0,0,0,6,0,4,0,4,0
+lab04-starter,edu.cssd2101.lab04,CatalogueService,92,78,10,4,20,22,9,5,2,5
+lab04-starter,edu.cssd2101.lab04,MissingBookException,4,0,0,0,2,0,1,0,1,0
+lab04-starter,edu.cssd2101.lab04,CatalogueController,41,0,0,0,10,0,6,0,6,0
+lab04-starter,edu.cssd2101.lab04,Main,19,0,0,0,4,0,3,0,3,0
+lab04-starter,edu.cssd2101.lab04,ApiError,9,0,0,0,1,0,1,0,1,0
+lab04-starter,edu.cssd2101.lab04,JsonCatalogue,128,0,4,0,27,0,5,0,3,0
+lab04-starter,edu.cssd2101.lab04,MemoryCatalogue,0,14,0,0,0,5,0,3,0,3
+lab04-starter,edu.cssd2101.lab04,Format,0,15,0,0,0,3,0,1,0,1

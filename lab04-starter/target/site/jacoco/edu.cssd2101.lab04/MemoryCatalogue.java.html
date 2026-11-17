@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MemoryCatalogue.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">lab04-starter</a> &gt; <a href="index.source.html" class="el_package">edu.cssd2101.lab04</a> &gt; <span class="el_source">MemoryCatalogue.java</span></div><h1>MemoryCatalogue.java</h1><pre class="source lang-java linenums">package edu.cssd2101.lab04;
+
+import java.util.List;
+
+/** In-memory baseline adapter. Its contents disappear when this process stops. */
+public final class MemoryCatalogue implements CataloguePort {
+<span class="fc" id="L7">    private List&lt;Book&gt; books = List.of();</span>
+
+    /** Creates an empty transient catalogue. */
+<span class="fc" id="L10">    public MemoryCatalogue() {}</span>
+
+    @Override
+    public List&lt;Book&gt; load() {
+<span class="fc" id="L14">        return books;</span>
+    }
+
+    @Override
+    public void save(List&lt;Book&gt; books) {
+<span class="fc" id="L19">        this.books = List.copyOf(books);</span>
+<span class="fc" id="L20">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>
