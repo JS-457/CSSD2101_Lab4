@@ -1,0 +1,14 @@
+edu\cssd2101\lab04\ApiErrors.class
+edu\cssd2101\lab04\ApiError.class
+edu\cssd2101\lab04\Format.class
+edu\cssd2101\lab04\CatalogueController.class
+edu\cssd2101\lab04\CatalogueService.class
+edu\cssd2101\lab04\MemoryCatalogue.class
+edu\cssd2101\lab04\MissingBookException.class
+edu\cssd2101\lab04\Book.class
+edu\cssd2101\lab04\BookRequest.class
+edu\cssd2101\lab04\Main.class
+edu\cssd2101\lab04\package-info.class
+edu\cssd2101\lab04\CataloguePort.class
+edu\cssd2101\lab04\StorageException.class
+edu\cssd2101\lab04\JsonCatalogue.class

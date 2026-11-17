@@ -1,0 +1,38 @@
+-------------------------------------------------------------------------------
+Test set: edu.cssd2101.lab04.CatalogueServiceTest
+-------------------------------------------------------------------------------
+Tests run: 8, Failures: 3, Errors: 1, Skipped: 0, Time elapsed: 0.604 s <<< FAILURE! -- in edu.cssd2101.lab04.CatalogueServiceTest
+edu.cssd2101.lab04.CatalogueServiceTest.crudSnapshotsIdentityAndMissing -- Time elapsed: 0.012 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <24b469d6-9eeb-4d96-99cf-319538dec645> but was: <7bf70345-41d7-414c-b0dd-6536f8b5e15b>
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1199)
+	at edu.cssd2101.lab04.CatalogueServiceTest.crudSnapshotsIdentityAndMissing(CatalogueServiceTest.java:45)
+
+edu.cssd2101.lab04.CatalogueServiceTest.jsonRoundTripRestartAndDeletionPersistence -- Time elapsed: 0.003 s <<< ERROR!
+java.lang.UnsupportedOperationException: T4 atomic snapshot persistence not implemented
+	at edu.cssd2101.lab04.JsonCatalogue.save(JsonCatalogue.java:49)
+	at edu.cssd2101.lab04.CatalogueService.commit(CatalogueService.java:120)
+	at edu.cssd2101.lab04.CatalogueService.create(CatalogueService.java:79)
+	at edu.cssd2101.lab04.CatalogueServiceTest.jsonRoundTripRestartAndDeletionPersistence(CatalogueServiceTest.java:103)
+
+edu.cssd2101.lab04.CatalogueServiceTest.everyFailedWritePreservesMemoryAndStoredSnapshot -- Time elapsed: 0.004 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <edu.cssd2101.lab04.StorageException> but was: <java.lang.UnsupportedOperationException>
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3234)
+	at edu.cssd2101.lab04.CatalogueServiceTest.everyFailedWritePreservesMemoryAndStoredSnapshot(CatalogueServiceTest.java:91)
+Caused by: java.lang.UnsupportedOperationException: T3 deletion not implemented
+	at edu.cssd2101.lab04.CatalogueService.delete(CatalogueService.java:116)
+	at edu.cssd2101.lab04.CatalogueServiceTest.lambda$everyFailedWritePreservesMemoryAndStoredSnapshot$2(CatalogueServiceTest.java:91)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:54)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	... 2 more
+
+edu.cssd2101.lab04.CatalogueServiceTest.realFilesystemWriteFailureLeavesPreviousState -- Time elapsed: 0.004 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <edu.cssd2101.lab04.StorageException> but was: <java.lang.UnsupportedOperationException>
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3234)
+	at edu.cssd2101.lab04.CatalogueServiceTest.realFilesystemWriteFailureLeavesPreviousState(CatalogueServiceTest.java:143)
+Caused by: java.lang.UnsupportedOperationException: T4 atomic snapshot persistence not implemented
+	at edu.cssd2101.lab04.JsonCatalogue.save(JsonCatalogue.java:49)
+	at edu.cssd2101.lab04.CatalogueServiceTest.lambda$realFilesystemWriteFailureLeavesPreviousState$0(CatalogueServiceTest.java:143)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:54)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	... 2 more
+
