@@ -91,8 +91,8 @@ public final class CatalogueService {
      * @throws StorageException if persistence fails; state is unchanged
      */
     public synchronized Book replace(String id, BookRequest request) {
-        // TODO T2 deletion: follow the task contract in the handout.
-        throw new UnsupportedOperationException("T3 deletion not implemented");
+        // TODO T2 replacement: follow the task contract in the handout.
+        throw new UnsupportedOperationException("T2 replacement not implemented");
     }
 
     /**
@@ -104,8 +104,10 @@ public final class CatalogueService {
      * @throws StorageException if persistence fails; state is unchanged
      */
     public synchronized void delete(String id) {
-        // TODO T3 deletion: follow the task contract in the handout.
-        throw new UnsupportedOperationException("T3 deletion not implemented");
+        find(id);
+        Map<String, Book> next = new LinkedHashMap<>(entries);
+        next.remove(id);
+        commit(next);
     }
 
     private void commit(Map<String, Book> next) {
