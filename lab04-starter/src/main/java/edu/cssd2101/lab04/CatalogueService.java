@@ -91,8 +91,26 @@ public final class CatalogueService {
      * @throws StorageException if persistence fails; state is unchanged
      */
     public synchronized Book replace(String id, BookRequest request) {
-        // TODO T2 replacement: follow the task contract in the handout.
-        throw new UnsupportedOperationException("T2 replacement not implemented");
+    /**
+     * Replaces all editable fields while preserving identity and ordering.
+     *
+     * @param id existing canonical UUID
+     * @param request replacement fields
+     * @return persisted replacement
+     * @throws MissingBookException if absent
+     * @throws IllegalArgumentException if input is invalid
+     * @throws StorageException if persistence fails; state is unchanged
+     */
+    public synchronized Book replace(String id, BookRequest request) {
+        if (request == null) throw new IllegalArgumentException("Request is required");
+        Book replacement = request.toBook(id);
+        if (!entries.containsKey(id)) throw new MissingBookException(); // detects if ID is missing.
+
+        Map<String, Book> next = new LinkedHashMap<>(entries);
+        next.put(id, replacement);
+        commit(next);
+        return replacement;
+    }
     }
 
     /**
