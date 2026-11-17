@@ -45,7 +45,26 @@ public final class JsonCatalogue implements CataloguePort {
 
     @Override
     public void save(List<Book> books) {
-        // TODO T4 atomic snapshot persistence: follow the task contract in the handout.
-        throw new UnsupportedOperationException("T4 atomic snapshot persistence not implemented");
+        Path temporary = null;
+        try
+        {
+            byte[] json = mapper.writeValueAsBytes(books);
+            Files.createDirectories(file.getParent());
+            temporary = Files.createTempFile(file.getParent(), ".catalog-", ".tmp");
+            Files.write(temporary, json);
+
+            Files.move(temporary, file, StandardCopyOption.ATOMIC_MOVE, StandardCopyOption.REPLACE_EXISTING);
+        }
+        catch(Exception e){throw new StorageException(e);}
+        finally{
+            if (temporary != null) {
+                try {
+                    Files.deleteIfExists(temporary);
+                }
+                catch (java.io.IOException ignored) {
+                    /* Best-effort cleanup does not change the transaction result. */
+                }
+            }
+        }
     }
 }
