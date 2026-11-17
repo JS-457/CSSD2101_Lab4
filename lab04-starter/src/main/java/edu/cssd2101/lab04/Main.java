@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import java.nio.file.Path;
 
 /** Composition root for the local, single-process catalogue server. */
 @SpringBootApplication
@@ -29,6 +30,6 @@ public class Main {
     @Bean
     public CatalogueService catalogueService(
             @Value("${catalogue.file:./data/catalogue.json}") String file) {
-        return new CatalogueService(new MemoryCatalogue());
+        return new CatalogueService(new JsonCatalogue(Path.of(file)));
     }
 }
